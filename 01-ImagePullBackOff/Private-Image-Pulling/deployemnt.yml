@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: circleci-eks-deploy
+  labels:
+    app: circleci-eks
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: circleci-eks
+  template:
+    metadata:
+      labels:
+        app: circleci-eks
+    spec:
+      containers:
+      - name: circleci-eks
+        image: sachinayeshmantha/circleci-eks-deploy:build-21
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+        - name: circleci-eks-secret

@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: netflix-clone
+  labels:
+    app: netflix-clone
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: netflix-clone
+  template:
+    metadata:
+      labels:
+        app: netflix-clone
+    spec:
+      containers:
+      - name: netflix-clone
+        image: 992382677601.dkr.ecr.us-east-1.amazonaws.com/dev/netflix-app:latest
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+        - name: aws-netflix-secret
